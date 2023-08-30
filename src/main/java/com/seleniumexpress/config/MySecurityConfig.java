@@ -14,11 +14,11 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 	// I want to create some details for an user
 	// username, password, roles
 	// manish, mani123, admin
-	
-	/*@Autowired
+	/*
+	@Autowired
 	private PasswordEncoder bcryptPasswordEncoder;
 	*/
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		//now load the user info from database
@@ -28,21 +28,27 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		
 		//here saving and loading the user from server memory
-		/*
+	
 		auth
 		.inMemoryAuthentication()
 		.withUser("manish")
+		//.password("mani123")//mani123 // here using noop id for NoOpPasswordEncoder encoder. With the help of specific encoder id we can directly use it like in this line
 		//.password("{noop}mani123")//mani123 // here using noop id for NoOpPasswordEncoder encoder. With the help of specific encoder id we can directly use it like in this line
-		.password("{bcrypt}$2a$10$5OJ860mZwa9kAWhXcc/FzuXybTeeYi2ui65XkuJT85fxsym3hmwWW")//mani123 // here using id for bcryptpasswordEncoder encoder. With the help of specific encoder id we can directly use it like in this line
+		.password("{bcrypt}$2a$10$kLj4klrn4Bh7tT1nLKEDZ.748ndvI9xxYrY/XUU5vWQfy68XfU6qm")//mani123 // here using id for bcryptpasswordEncoder encoder. With the help of specific encoder id we can directly use it like in this line i.e we don't need to create bean for specific passwordEnocder to use as id for that specific passwordEncoder 
+		//.password("$2a$10$kLj4klrn4Bh7tT1nLKEDZ.748ndvI9xxYrY/XUU5vWQfy68XfU6qm")//mani123 // here using id for bcryptpasswordEncoder encoder. With the help of specific encoder id we can directly use it like in this line
 		//.password(bcryptPasswordEncoder.encode("mani123"))//mani123
 		.roles("admin")
+		/*.and()
+		.withUser("Rohit")
+		.password("$2a$10$2SyviklNH5Le9tkgRk5dYe7bQbv20Ar6Z0Kf1xQFjoRIraQq2PUnC")//r123 //when you specify the BcryptPasswordEncoder and created bean by spring IOC then no need to pass as bcrypt id like above to authenticate as BcryptPasswordEncoder
+		.roles("user")*/
 		.and()
 		.withUser("kartik").password("{bcrypt}$2a$12$VIn6aiqFweTNXWlKkSafXOrbpkY6DD1/JvtqztJ1q.Z6nYqSdx/9i").roles("user"); //k123
-		*/
+	
 		//System.out.println("mani123 encoded password is "+bcryptPasswordEncoder.encode("mani123"));
 	}
 	
-	/*
+/*
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -54,7 +60,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 		.httpBasic();
 	}
-	 */
+*/
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
