@@ -1,10 +1,13 @@
 package com.seleniumexpress.config;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 // this class is going to help you to create the spring security filter chain 
@@ -14,10 +17,12 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 	// I want to create some details for an user
 	// username, password, roles
 	// manish, mani123, admin
-	/*
+	
 	@Autowired
 	private PasswordEncoder bcryptPasswordEncoder;
-	*/
+	
+	@Autowired
+	private DataSource dataSource;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -28,7 +33,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		
 		//here saving and loading the user from server memory
-	
+	/*
 		auth
 		.inMemoryAuthentication()
 		.withUser("manish")
@@ -38,14 +43,15 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		//.password("$2a$10$kLj4klrn4Bh7tT1nLKEDZ.748ndvI9xxYrY/XUU5vWQfy68XfU6qm")//mani123 // here using id for bcryptpasswordEncoder encoder. With the help of specific encoder id we can directly use it like in this line
 		//.password(bcryptPasswordEncoder.encode("mani123"))//mani123
 		.roles("admin")
-		/*.and()
-		.withUser("Rohit")
-		.password("$2a$10$2SyviklNH5Le9tkgRk5dYe7bQbv20Ar6Z0Kf1xQFjoRIraQq2PUnC")//r123 //when you specify the BcryptPasswordEncoder and created bean by spring IOC then no need to pass as bcrypt id like above to authenticate as BcryptPasswordEncoder
-		.roles("user")*/
+		//.and().withUser("Rohit").password("$2a$10$2SyviklNH5Le9tkgRk5dYe7bQbv20Ar6Z0Kf1xQFjoRIraQq2PUnC")//r123 //when you specify the BcryptPasswordEncoder and created bean by spring IOC then no need to pass as bcrypt id like above to authenticate as BcryptPasswordEncoder
+		//.roles("user")
 		.and()
 		.withUser("kartik").password("{bcrypt}$2a$12$VIn6aiqFweTNXWlKkSafXOrbpkY6DD1/JvtqztJ1q.Z6nYqSdx/9i").roles("user"); //k123
-	
+	*/
 		//System.out.println("mani123 encoded password is "+bcryptPasswordEncoder.encode("mani123"));
+		
+		// here saving and loading the user from mysql database
+		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(bcryptPasswordEncoder);
 	}
 	
 /*
