@@ -68,7 +68,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 */
 	
-	@Override
+	/*@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
@@ -81,6 +81,22 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		.httpBasic()
 		.and().logout();
 	}
+	*/
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+		.authorizeRequests()
+		//.anyRequest().authenticated() //to authenticate all the request
+		.antMatchers("/coder").hasAuthority("Coder")
+		.antMatchers("/trainer").hasAuthority("Trainer")
+		.and()
+		.formLogin().loginPage("/myCustomLogin").loginProcessingUrl("/process-login").permitAll() //by using loginPage here it will show the our custom login page instead of default spring login page
+		.and()
+		.httpBasic()
+		.and().logout()
+		.and().exceptionHandling().accessDeniedPage("/accessDenied");
+	}
+	
+	
 
 	
 	
