@@ -16,6 +16,7 @@ public class HelloWorldController {
 	// Principal means username
 	@GetMapping("/") // don't secure this
 	public String getHelloWorld(Principal principal,Authentication auth,Model model) { 
+		if(principal!=null) {
 		//fetching the userName
 		String userName = principal.getName();
 		System.out.println("Logged in user is "+userName);
@@ -26,8 +27,11 @@ public class HelloWorldController {
 		model.addAttribute("userName", userName);
 		model.addAttribute("roles", authorities);
 		
-		
 		return "home-page";
+		}else {
+			System.out.println("Welcome in Hello world");
+			return "redirect:/signup";
+		}
 	}
 	
 	@GetMapping("/trainer") //secure it
