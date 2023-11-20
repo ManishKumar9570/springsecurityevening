@@ -20,6 +20,9 @@
 <sec:authorize access='hasAuthority("Coder")'>
 <a href="/springsecurityevening/coder">Show Coder's Dashboard</a>
 </sec:authorize>
+<br>
+<a href="/springsecurityevening/delete?username=${userName}">Delete your Account permanently</a>
+
 <form:form action="logout" method="POST">
 	<input type="submit" value="logout">
 </form:form>

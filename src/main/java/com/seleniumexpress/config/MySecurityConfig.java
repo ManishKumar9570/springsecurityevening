@@ -7,8 +7,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 // this class is going to help you to create the spring security filter chain 
 @EnableWebSecurity(debug=true) // creating a chain of filters called SpringSecurityFilterChain using @EnableWebSecurity annotation
@@ -50,8 +52,35 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 	*/
 		//System.out.println("mani123 encoded password is "+bcryptPasswordEncoder.encode("mani123"));
 		
-		// here saving and loading the user from mysql database
+		// here loading the user from mysql database
 		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(bcryptPasswordEncoder);
+		
+		//let's do some in memory auth
+	/*	ArrayList<GrantedAuthority> roles=new ArrayList<GrantedAuthority>();
+		SimpleGrantedAuthority role1=new SimpleGrantedAuthority("ADMIN");
+		SimpleGrantedAuthority role2=new SimpleGrantedAuthority("USER");
+		roles.add(role1);
+		roles.add(role2);
+				
+		//creating User which is already provided by spring
+		User anu=new User("anu@gmail.com","anu123",roles);
+	
+	*/
+		//Simplest way to create User which is provided by spring 
+	//UserDetails anuUser = User.withUsername("anu@gmail.com").password("anu123").roles("ADMIN","USER").build();
+	
+		// to save the user in either database or file or in memory (server memory) then we use implementation class of UserDetailsManager interface
+		
+		//here using InMenoryUserDetailsManager class to save the User in server memory
+		/*InMemoryUserDetailsManager userDetailsManager= new InMemoryUserDetailsManager();
+		UserDetails anuUser = User.withUsername("anu@gmail.com").password(bcryptPasswordEncoder.encode("anu123")).roles("ADMIN","USER").build();
+		UserDetails manishUser = User.withUsername("manish@gmail.com").password(bcryptPasswordEncoder.encode("mani123")).roles("ADMIN","USER").build();
+		
+		userDetailsManager.createUser(anuUser);
+		userDetailsManager.createUser(manishUser);
+		auth.userDetailsService(userDetailsManager);
+	*/
+		
 	}
 	
 /*
@@ -95,9 +124,5 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		.and().logout()
 		.and().exceptionHandling().accessDeniedPage("/accessDenied");
 	}
-	
-	
-
-	
 	
 }
