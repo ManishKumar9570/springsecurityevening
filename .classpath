@@ -21,6 +21,7 @@
 	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
@@ -63,7 +64,6 @@
 	<classpathentry kind="lib" path="C:/Dev/Softwares/apache-tomcat-9.0.52-windows-x64/apache-tomcat-9.0.52/lib/tomcat-util-scan.jar"/>
 	<classpathentry kind="lib" path="C:/Dev/Softwares/apache-tomcat-9.0.52-windows-x64/apache-tomcat-9.0.52/lib/tomcat-websocket.jar"/>
 	<classpathentry kind="lib" path="C:/Dev/Softwares/apache-tomcat-9.0.52-windows-x64/apache-tomcat-9.0.52/lib/websocket-api.jar"/>
-	<classpathentry kind="lib" path="C:/Users/AC96825/Downloads/jar_files/spring-jdbc-5.2.6.RELEASE.jar"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
@@ -72,12 +72,21 @@
 	</classpathentry>
 	<classpathentry kind="src" path="target/generated-sources/annotations">
 		<attributes>
+			<attribute name="ignore_optional_problems" value="true"/>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="ignore_optional_problems" value="true"/>
 			<attribute name="m2e-apt" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
+		<attributes>
+			<attribute name="test" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Dev/Projects/CMS/Repo/org/springframework/spring-jdbc/5.2.6.RELEASE"/>
+	<classpathentry kind="lib" path="C:/Dev/Projects/CMS/Repo/org/springframework/security/spring-security-taglibs/5.2.6.RELEASE"/>
 	<classpathentry kind="src" output="target/test-classes" path="target/generated-test-sources/test-annotations">
 		<attributes>
 			<attribute name="optional" value="true"/>

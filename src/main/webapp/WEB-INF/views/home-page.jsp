@@ -22,6 +22,8 @@
 </sec:authorize>
 <br>
 <a href="/springsecurityevening/delete?username=${userName}">Delete your Account permanently</a>
+&nbsp;
+<a href="/springsecurityevening/changePassword?username=${userName}">Change Password</a>
 
 <form:form action="logout" method="POST">
 	<input type="submit" value="logout">
